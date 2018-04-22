@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="css/bootstrap.min.css" />
+		<script language="JavaScript" src="js/jquery-3.3.1.js"></script>
+		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<title>my first vue</title>
+	</head>
+
+	<body class="container">
+		<div id="app-1">
+			{{ message }}
+		</div>
+		<hr />
+		<div id="app-2">
+			<span v-bind:title="message">
+    			鼠标悬停查看提示信息！！！
+  			</span>
+		</div>
+		<hr />
+		<div id="app-3">
+			<template v-if="seen==='A'">
+				<h4>现在你看到我了</p4>
+				<h4>AAAAAAA</h4>
+				<h4>哈哈哈</h4>
+			</template>
+			<template v-else-if="seen==='B'">
+				<h4>现在你看到我了</p4>
+				<h4>BBBBBBBB</h4>
+				<h4>哈哈哈</h4>
+			</template>
+			<h4 v-else>現在應該看不到我</h4>
+		</div>
+		<hr />
+		<div id="app-4" class="demo">
+			<ul>
+				<li v-for="(value,key,index) in object">
+					{{index+1}}--{{key}}:{{value}}
+				</li>
+			</ul>
+		</div>
+		<hr />
+		<h2>v-on(@)</h2>
+		<div id="app-5" class="col-md-2 col-md-offset-2">
+			<p>{{message}}</p>
+			<button v-on:click="reserve()">逆轉</button>
+		</div>
+		<div id="app-5_1" class="col-md-2 col-md-offset-2">
+			<button class="btn btn-info" @click="add">+1</button>
+			<p>您摁了{{ counter }}次</p>
+		</div>
+		<div class="clearfix"></div>
+		<hr />
+		<h2>v-model</h2>
+		<div id="app-6" class="col-md-2 col-md-offset-2">
+			<p>随便输入一个数，比如：{{message}}</p>
+			<input v-model="message">
+		</div><br/>
+		<hr />
+		<div class="clearfix"></div>
+		<h2>key</h2>
+		<div id="app_6_1" class="col-md-2 col-md-offset-2">
+			<template v-if="value==='username'">
+				<label>Username</label>
+				<input placeholder="Enter your username" key="username-input">
+			</template>
+			<template v-else>
+				<label>Email</label>
+				<input placeholder="Enter your email" key="username-email">
+			</template>
+			<button class="btn btn-success" @click="chance">{{type}}</button>
+		</div><hr />
+		<div class="clearfix"></div>
+		<h2>计算属性 Computed</h2>
+		<div id="app-7" class="col-md-4 col-md-offset-2">
+			<p>
+				厂价：{{ poromessage}} 进价: "{{ message }}" 税后: " {{reversedMessage() }}"
+				<button @click="add">进价+100</button>
+				<button @click="add1(100)">厂价+100</button>
+			</p>
+		</div>
+		<hr />
+		<div class="clearfix"></div>
+		<h2>条件渲染</h2>
+		<script>
+			var app1 = new Vue({
+				el: '#app-1',
+				data: {
+					message: 'Hello Vue!'
+				}
+			})
+			var app2 = new Vue({
+				el: '#app-2',
+				data: {
+					message: '页面加载于' + new Date().toLocaleString()
+				}
+			})
+			var app3 = new Vue({
+				el: '#app-3',
+				data: {
+					seen: 'A'
+				}
+			})
+			var app4 = new Vue({
+				el: '#app-4',
+				data: {
+					object: {
+						步驟1: '學習HTML 學習CSS',
+						步驟2: '學習JAVASCRIPT',
+						步驟3: '學習VUE'
+					}
+				}
+			})
+			var app5 = new Vue({
+				el: "#app-5",
+				data: {
+					message: '123456789'
+				},
+				methods: {
+					reserve: function() {
+						this.message = this.message.split('').reverse().join('')
+					}
+				}
+			})
+			var app5_1 = new Vue({
+				el: "#app-5_1",
+				data: {
+					counter: 0
+				},
+				methods: {
+					add: function() {
+						if(this.counter < 10) {
+							this.counter += 1
+						} else {
+							alert("十次啦！够了！")
+						}
+					}
+				}
+			})
+			var app6 = new Vue({
+				el: "#app-6",
+				data: {
+					message: '1234'
+				}
+			})
+			var app6_1 = new Vue({
+				el:"#app_6_1",
+				data:{
+					value:'username',
+					type:'Email登录'
+				},
+				methods:{
+					chance:function(){
+						if(this.value==='username'){
+							this.value='email',
+							this.type='用户名登录'
+						}
+						else{
+							this.value='username',
+							this.type='Email登录'
+						}						
+					}
+				}
+			})
+			var app7 = new Vue({
+				el: '#app-7',
+				data: {
+					message: 200
+				},
+				methods: {
+					reversedMessage: function() {
+						return this.message * 1.5
+					},
+					add: function() {
+						this.message += 100
+					},
+					add1: function() {
+						this.poromessage += 100
+					}
+				},
+				computed: {
+					poromessage: {
+						get: function() {
+							return this.message * 0.95
+						},
+						set: function() {
+							this.message = (this.poromessage + 100) / 0.95
+						}
+					}
+				}
+			})
+		</script>
+	</body>
+
+</html>

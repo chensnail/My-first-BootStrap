@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>my first web</title>
+		<link rel="stylesheet"href="css/bootstrap.min.css"/>
+		<script language="JavaScript" src="js/jquery-3.3.1.js"></script>		
+		<script language="JavaScript" src="js/bootstrap.min.js"></script>	
+		<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+		<title></title>
+	</head>
+	<body>
+		<div class="dropdown">
+  			<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+    			Dropdown
+    			<span class="caret"></span>
+  			</button>
+  			<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+    			<li><a href="#">Action</a></li>
+    			<li><a href="#">Another action</a></li>
+    			<li><a href="#">Something else here</a></li>
+   				<li role="separator" class="divider"></li>
+    			<li><a href="#">Separated link</a></li>
+  			</ul>
+		</div>
+	  <div class="container">
+		<div id="app-6" class="col-md-2 col-md-offset-4">
+			<p>{{message}}</p>
+			<input v-model="message">
+		</div><hr />
+	  </div>
+		<script>
+			var app6 = new Vue({
+				el: "#app-6",
+				data: {
+					message: '1234'
+				}
+			})
+		</script>
+	</body>
+</html>
